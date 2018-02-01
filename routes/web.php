@@ -1,13 +1,13 @@
 <?php
 
-Route::group(['middleware' => 'guest'], function() {
+Route::group(['middleware' => 'auth'], function() {
 	Route::get('/profile', 'CustomersController@registerCustomer');	
 	Route::post('/profile', 'CustomersController@createCustomer');	
 
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.signin');
 });
 
 Auth::routes();

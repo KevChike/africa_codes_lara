@@ -152,51 +152,82 @@
                                       <div class="form-group">
                                           <label class="col-lg-3 control-label">Full Name</label>
                                           <div class="col-lg-9">
-                                              <input type="text" class="form-control" placeholder="" name="fullname">
+                                              <input type="text" class="form-control" placeholder="" name="fullname" value="{{ old('fullname') }}">
+                                              @if ($errors->has('fullname'))
+                                                  <span class="help-block">
+                                                      <strong>{{ $errors->first('fullname') }}</strong>
+                                                  </span>
+                                              @endif
                                           </div>
                                       </div>
                                       <div class="form-group" style="margin-bottom:7px;">
                                           <label class="col-lg-3 control-label"> State of Residence</label>
                                           <div class="col-lg-9">
                                               <select class="form-control" style="width:100%;" name="state_origin">
-                                                <option>Choose</option>
-                                                <option>Lagos</option>
-                                                <option>Ibadan</option>
-                                                <option>Abuja</option>
+                                                <option value="">Choose</option>
+                                                <option value="Lagos" {{ old('state_origin') == 'Lagos' ? 'selected' : ''  }}>Lagos</option>
+                                                <option value="Ibadan" {{ old('state_origin') == 'Ibadan' ? 'selected' : ''  }}>Ibadan</option>
+                                                <option value="Abuja" {{ old('state_origin') == 'Abuja' ? 'selected' : ''  }}>Abuja</option>
                                               </select>
+                                              @if ($errors->has('state_origin'))
+                                                  <span class="help-block">
+                                                      <strong>{{ $errors->first('state_origin') }}</strong>
+                                                  </span>
+                                              @endif
                                           </div>
                                       </div>
                                        <div class="form-group">
                                           <label class="col-lg-3 control-label">Phone</label>
                                           <div class="col-lg-9">
-                                              <input type="text" class="form-control" placeholder="" name="phone">
+                                              <input type="text" class="form-control" placeholder="" name="phone" value="{{ old('phone') }}" maxlength="14">
+                                              @if ($errors->has('phone'))
+                                                  <span class="help-block">
+                                                      <strong>{{ $errors->first('phone') }}</strong>
+                                                  </span>
+                                              @endif
                                           </div>
                                       </div>
                                       <div class="form-group">
                                          <label class="col-lg-3 control-label">Email </label>
                                           <div class="col-lg-9">
-                                              <input type="text" class="form-control" placeholder="" name="email">
+                                              <input type="text" class="form-control" placeholder="" name="email" value="{{ old('email') }}">
+                                              @if ($errors->has('email'))
+                                                  <span class="help-block">
+                                                      <strong>{{ $errors->first('email') }}</strong>
+                                                  </span>
+                                              @endif
                                           </div>
                                       </div>
 
                                         <div class="form-group">
                                                   <label class="control-label col-lg-3">Date</label>
                                                   <div class="col-lg-9">
-                                                      <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" name="trans_date" />
+                                                      <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" name="trans_date"  readonly value="{{ old('trans_date') }}" />
+                                                      @if ($errors->has('trans_date'))
+                                                          <span class="help-block">
+                                                              <strong>{{ $errors->first('trans_date') }}</strong>
+                                                          </span>
+                                                      @endif
                                                   </div>
                                               </div>
                                       <div class="form-group">
                                           <label class="col-lg-3 control-label">Secret PIN</label>
                                           <div class="col-lg-9">
-                                              <input type="text" class="form-control" placeholder="" name="secret_pin">
+                                              <input type="text" class="form-control" placeholder="" name="secret_pin" value="{{ old('secret_pin') }}">
+                                              @if ($errors->has('secret_pin'))
+                                                  <span class="help-block">
+                                                      <strong>{{ $errors->first('secret_pin') }}</strong>
+                                                  </span>
+                                              @endif
                                           </div>
                                       </div>
                                       
                                       
                                       
-                                      <button class="btn btn-info" id="but1ZZ" type="submit" style=" float: right; margin-left: 5px;">Submit</button> 
+                                      <button class="btn btn-info pull-left" id="but1" type="submit" style=" float: right; margin-left: 5px;">View Customers</button> 
+                                      <button class="btn btn-info" type="submit" style=" float: right; margin-left: 5px;">Submit</button> 
                                      <!-- <input type="submit"  id ="buttn" data-toggle="modal" class="finish btn btn-info" value="Submit"> --> 
-                                     <input type="submit" class="finish btn btn-danger" value="Cancel">
+                                     <input type="button" class="finish btn btn-danger" value="Cancel">
                             </form>
                           </div>
                       </section>
@@ -286,6 +317,8 @@
    
     
     });
+
+       
 
     </script>
   

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function registerCustomer()
     {
     	return view('pages.profile');
@@ -14,6 +19,15 @@ class CustomersController extends Controller
 
     public function createCustomer(Request $request)
     {
+    	$this->validate($request, [
+    		'fullname' => 'required',
+            'state_origin' => 'required',
+            'phone' => 'required|regex:/^[0-9\-\+]{9,15}$/',
+            'email' => 'required',
+            'trans_date' => 'required|date_format:Y-m-d|before:'.date('Y-m-d', strtotime('tomorrow')),
+            'secret_pin' => 'required',
+    	]);
+
     	$customer = new Customer;
 
     	$customer->fullname = $request->input('fullname');

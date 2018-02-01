@@ -12,8 +12,8 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
     <!-- Bootstrap CSS -->
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/material.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/material.css">
 
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/material.css"> -->
@@ -22,12 +22,12 @@
     <!-- Compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css"> -->
 
-    <link rel="stylesheet" type="text/css" href="css/signin.css">
+    <link rel="stylesheet" type="text/css" href="/css/signin.css">
     <!-- custom scrollbar stylesheet -->
-	<link rel="stylesheet" type="text/css" href="css/pstyle.css">
-	<link rel="stylesheet" type="text/css" href="css/spin.css">
+	<link rel="stylesheet" type="text/css" href="/css/pstyle.css">
+	<link rel="stylesheet" type="text/css" href="/css/spin.css">
 
-	<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
 </head>
 
@@ -69,8 +69,8 @@
 			
 			<div class="right_block">
 				<div class="row">
-					<form class="col-md-12 col-sm-12 col-xs-12">
-
+					<form class="col-md-12 col-sm-12 col-xs-12" method="POST" action="{{ route('login') }}">
+						{{ csrf_field() }}
                         <!-- fixes autocomplete off -->
                         <input style="display:none">
                         <input type="password" style="display:none">
@@ -80,12 +80,14 @@
 						<div class="row">
 							<div class="input-field col-md-12 col-sm-12 col-xs-12">
 								<i class="ion-coffee prefix"></i>
-								<input id="icon_prefix-2" name="icon_prefix-2" type="text" class="validate">
+								{{-- <input id="icon_prefix-2" name="icon_prefix-2" type="text" class="validate"> --}}
+								<input id="icon_prefix-2" type="email" class="validate" name="email" value="{{ old('email') }}">
 								<label for="icon_prefix-2">Username</label>
 							</div>
 							<div class="input-field col-md-12 col-sm-12 col-xs-12">
 								<i class="ion-key prefix"></i>
-								<input id="icon_prefix-3" type="password" class="validate">
+								{{-- <input id="icon_prefix-3" type="password" class="validate"> --}}
+								<input id="icon_prefix-3" type="password" class="validate" name="password">
 								<label for="icon_prefix-3">Password</label>
 							</div>
 						</div>
@@ -94,7 +96,12 @@
 							<a href="#" class="pull-left">Register new account</a> -->
 						</div>
 						<div class="clearfix"></div>
-						<a href="profile.html" class="btn btn-primary btn-block">Sign in</a>
+						<div class="row">
+							<div class="input-field col-md-12 col-sm-12 col-xs-12">
+								<button type="submit" class="btn btn-primary btn-block">Sign in </button>
+							</div>
+						</div>
+						{{-- <a href="profile.html" class="btn btn-primary btn-block">Sign in</a> --}}
 					</form>
 				</div>                
 			</div>
