@@ -14,7 +14,9 @@ class CustomersController extends Controller
 
     public function registerCustomer()
     {
-    	return view('pages.profile');
+    	$customers = Customer::all();
+
+    	return view('pages.profile', compact('customers'));
     }
 
     public function createCustomer(Request $request)
@@ -51,7 +53,7 @@ class CustomersController extends Controller
     	return response()->json($response, 200);
     }
 
-    public function updateCustomer(Request $request, $id)
+    /*public function updateCustomer(Request $request, $id)
     {
     	$customer = Customer::find($id);
     	if(!$customer) {
@@ -75,5 +77,5 @@ class CustomersController extends Controller
     	$customer->delete();
 
     	return response()->json(['customer' => 'Customer deleted']);
-    }
+    }*/
 }

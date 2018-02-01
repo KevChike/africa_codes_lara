@@ -3,6 +3,7 @@
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/profile', 'CustomersController@registerCustomer');	
 	Route::post('/profile', 'CustomersController@createCustomer');	
+	Route::get('/dashboard', 'DashboardController@dashboard');	
 
 });
 

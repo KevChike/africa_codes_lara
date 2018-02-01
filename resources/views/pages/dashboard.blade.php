@@ -63,13 +63,22 @@
                           <li class="dropdown">
                               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                   <img alt="" src="img/images.png" style="width: 30px;height: 30px;">
-                                  <span class="username">Jhon Doue</span>
+                                  <span class="username">{{ Auth::user()->name }}</span>
                                   <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu extended logout">
                                   <div class="log-arrow-up"></div>
                                   
-                                  <li><a href="signin.html"><i class="fa fa-key"></i> Log Out</a></li>
+                                  <li>
+                                    <a href="{{ route('logout') }}"
+                                      onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                      <i class="fa fa-key"></i> Log Out
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                  </li>
                               </ul>
                           </li>
                           
@@ -113,7 +122,7 @@
                         </div>
                     </div>
                   </div>
-                   <span><a href="profile.html"><i class="fa  fa-angle-double-left" style=" font-size: 25px;color: #1ab394;"></i></a></span>
+                   <span><a href="/profile"><i class="fa  fa-angle-double-left" style=" font-size: 25px;color: #1ab394;"></i></a></span>
                <div class="col-lg-12" style="margin-top:20px;">
                   <div class="col-lg-6">
                     <section class="panel" style="height:370px;">
@@ -218,7 +227,7 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="assets/chart-master/Chart.js"></script>
     <script src="js/respond.min.js" ></script>
-    <script src="js/count.js"></script>
+    {{-- <script src="js/count.js"></script> --}}
   <!--right slidebar-->
   <script src="js/slidebars.min.js"></script>
 
@@ -232,6 +241,100 @@
           $('.spin-icon').click(function () {
             $(".theme-config-box").toggleClass("show");
         });
+  </script>
+
+  <script type="text/javascript">
+    function countUp(count)
+{
+    var div_by = 100,
+        speed = Math.round(count / div_by),
+        $display = $('.count'),
+        run_count = 1,
+        int_speed = 24;
+
+    var int = setInterval(function() {
+        if(run_count < div_by){
+            $display.text(speed * run_count);
+            run_count++;
+        } else if(parseInt($display.text()) < count) {
+            var curr_count = parseInt($display.text()) + 1;
+            $display.text(curr_count);
+        } else {
+            clearInterval(int);
+        }
+    }, int_speed);
+}
+
+countUp({{ $users }});
+
+function countUp2(count)
+{
+    var div_by = 100,
+        speed = Math.round(count / div_by),
+        $display = $('.count2'),
+        run_count = 1,
+        int_speed = 24;
+
+    var int = setInterval(function() {
+        if(run_count < div_by){
+            $display.text(speed * run_count);
+            run_count++;
+        } else if(parseInt($display.text()) < count) {
+            var curr_count = parseInt($display.text()) + 1;
+            $display.text(curr_count);
+        } else {
+            clearInterval(int);
+        }
+    }, int_speed);
+}
+
+countUp2({{ $customers }});
+
+function countUp3(count)
+{
+    var div_by = 100,
+        speed = Math.round(count / div_by),
+        $display = $('.count3'),
+        run_count = 1,
+        int_speed = 24;
+
+    var int = setInterval(function() {
+        if(run_count < div_by){
+            $display.text(speed * run_count);
+            run_count++;
+        } else if(parseInt($display.text()) < count) {
+            var curr_count = parseInt($display.text()) + 1;
+            $display.text(curr_count);
+        } else {
+            clearInterval(int);
+        }
+    }, int_speed);
+}
+
+countUp3(328);
+
+function countUp4(count)
+{
+    var div_by = 100,
+        speed = Math.round(count / div_by),
+        $display = $('.count4'),
+        run_count = 1,
+        int_speed = 24;
+
+    var int = setInterval(function() {
+        if(run_count < div_by){
+            $display.text(speed * run_count);
+            run_count++;
+        } else if(parseInt($display.text()) < count) {
+            var curr_count = parseInt($display.text()) + 1;
+            $display.text(curr_count);
+        } else {
+            clearInterval(int);
+        }
+    }, int_speed);
+}
+
+countUp4(10328);
   </script>
   </body>
 

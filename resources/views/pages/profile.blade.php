@@ -38,6 +38,11 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+      span.help-block {
+        color: red;
+      }
+    </style>
   </head>
   <body class="">
 
@@ -65,13 +70,22 @@
                           <li class="dropdown">
                               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                   <img alt="" src="img/images.png" style="width: 30px;height: 30px;">
-                                  <span class="username">Jhon Doue</span>
+                                  <span class="username">{{ Auth::user()->name }}</span>
                                   <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu extended logout">
                                   <div class="log-arrow-up"></div>
                                   
-                                  <li><a href="signin.html"><i class="fa fa-key"></i> Log Out</a></li>
+                                  <li>
+                                    <a href="{{ route('logout') }}"
+                                      onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                      <i class="fa fa-key"></i> Log Out
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                  </li>
                               </ul>
                           </li>
                           
@@ -114,7 +128,7 @@
                       </div>
                   </div>
               
-                  <span><a href="signin.html"><i class="fa  fa-angle-double-left" style=" font-size: 25px;color: #1ab394;"></i></a></span>
+                  <span><a href="#"><i class="fa  fa-angle-double-left" style=" font-size: 25px;color: #1ab394;"></i></a></span>
                 <div class="col-lg-12" style="    margin-top: 10px;">
                 
                     <div class="profile-nav col-lg-4">
@@ -137,12 +151,12 @@
                                                    </span>
                                </li>
                               <li ><a href="#" class="btn "></i>Save</a></li>
-                              <li ><a href="dashboard.html" class="btn "></i>Proceed</a></li>
+                              <li ><a href="/dashboard" class="btn "></i>Proceed</a></li>
                           </ul>
                       </section>
                     </div>
                     <div class="col-lg-8">
-                      <section class="panel" id="sec1" style=" height: 420px;">
+                      <section class="panel" id="sec1" style=" min-height: 420px;">
                         <header class="panel-heading" style="padding:10px;" >
                           <h4>Customer Registration</h4>
                         </header>
@@ -232,38 +246,33 @@
                           </div>
                       </section>
                       <section class="panel" id="sec2" style="display:none; height: 420px;">
-                                                               <div class="panel-body">
-                                                                   <table class="table">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>First Name</th>
-                                                                            <th>Last Name</th>
-                                                                            <th>Username</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Mark</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2</td>
-                                                                            <td>Jacob</td>
-                                                                            <td>Thornton</td>
-                                                                            <td>@fat</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>3</td>
-                                                                            <td>Larry</td>
-                                                                            <td>the Bird</td>
-                                                                            <td>@twitter</td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                          <button class="btn btn-info" id="but2" type="button" style=" position: absolute; right: 34px;top: 375px; ">Back</button>
+                        <div class="panel-body">
+                             <table class="table">
+                                  <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Full Name</th>
+                                      <th>Email</th>
+                                      <th>Phone</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                     @forelse( $customers as $customer )
+                                      <tr>
+                                        <td>{{ $customer->id }}</td>
+                                        <td>{{ $customer->fullname }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->phone }}</td>
+                                      </tr>
+
+                                     @empty
+
+                                      <tr>No customer avaliable</tr>
+
+                                     @endforelse
+                                  </tbody>
+                              </table>
+                                <button class="btn btn-info" id="but2" type="button" style=" position: absolute; right: 34px;top: 375px; ">Back</button>
                        </section>
                     </div>
                 </div>
